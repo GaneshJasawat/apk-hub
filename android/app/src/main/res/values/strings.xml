@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ApkHub</string>
+    <string name="title_activity_main">ApkHub</string>
+    <string name="package_name">com.apkhub.app</string>
+    <string name="custom_url_scheme">com.apkhub.app</string>
+</resources>
