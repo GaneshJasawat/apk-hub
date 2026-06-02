@@ -58,20 +58,20 @@ jobs:
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-36" "build-tools;36.0.0" 2>&1 || echo "SDK install continued"
 
       - name: Build APK
+        shell: bash
         run: |
           echo "=== Java ==="
           java -version
           echo "=== ANDROID_HOME ==="
           echo $ANDROID_HOME
-          ls -la $ANDROID_HOME/platforms/ 2>/dev/null || echo "No platforms dir"
           echo "=== Gradle ==="
           cd android
           chmod +x gradlew
           ./gradlew --version
           echo "=== assembleDebug ==="
-          ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee gradle.log
-          echo "=== Last 50 lines ==="
-          tail -50 gradle.log
+          set -o pipefail
+          ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee ../gradle.log
+          echo "=== Build succeeded ==="
 
       - name: Find and upload APK
         run: |
