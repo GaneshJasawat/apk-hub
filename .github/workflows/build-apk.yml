@@ -30,9 +30,6 @@ jobs:
       - name: Install dependencies
         run: npm install --ignore-engines
 
-      - name: Install sharp for asset generation
-        run: npm install sharp --no-save
-
       - name: Build web app
         run: npm run build
         env:
@@ -44,17 +41,13 @@ jobs:
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
           VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
 
-      - name: Rebuild Capacitor Android project
+      - name: Init Capacitor Android
         run: |
-          echo "=== Installing SDK ==="
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-36" "build-tools;36.0.0" 2>&1 || echo "SDK install continued"
-          echo "=== Init Capacitor Android ==="
-          rm -rf android
-          npx cap add android
+          npx cap add android --force
           npx cap copy android
           npx cap sync android
 
-      - name: Generate custom icons, splash & Android resources
+      - name: Generate Android resources (icons, splash, theme)
         run: node resources/icon-generate.cjs
 
       - name: Build APK
@@ -62,10 +55,8 @@ jobs:
         run: |
           cd android
           chmod +x gradlew
-          echo "=== Running assembleDebug ==="
           set -o pipefail
           ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee ../gradle.log
-          echo "=== Build done ==="
 
       - name: Upload build log
         if: always()
@@ -78,8 +69,6 @@ jobs:
       - name: Find and upload APK
         if: success()
         run: |
-          echo "Searching for APK..."
-          find android -name "*.apk" -type f
           APK=$(find android -name "*.apk" -type f | head -1)
           if [ -n "$APK" ]; then
             cp "$APK" apkhub-hybrid.apk
