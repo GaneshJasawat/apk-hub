@@ -47,33 +47,26 @@ jobs:
       - name: Generate PNG icon & splash assets
         run: node resources/icon-generate.cjs
 
-      - name: Copy web build to Android
-        run: npx cap copy android
-
-      - name: Sync Capacitor
-        run: npx cap sync android
-
-      - name: Install Android SDK components
+      - name: Rebuild Capacitor Android project
         run: |
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-36" "build-tools;36.0.0" "platforms;android-35" "build-tools;35.0.0" 2>&1 || echo "SDK install continued"
-          echo "=== Installed SDKs ==="
-          ls -la $ANDROID_HOME/platforms/
-          ls -la $ANDROID_HOME/build-tools/
+          echo "=== Installing SDK ==="
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-36" "build-tools;36.0.0" 2>&1 || echo "SDK install continued"
+          echo "=== Re-init Capacitor Android ==="
+          rm -rf android
+          npx cap add android
+          npx cap copy android
+          npx cap sync android
+          ls -la android/
 
       - name: Build APK
         shell: bash
         run: |
-          echo "=== Java ==="
-          java -version
-          echo "=== ANDROID_HOME: $ANDROID_HOME ==="
-          echo "=== Gradle version ==="
           cd android
           chmod +x gradlew
-          ./gradlew --version
           echo "=== Running assembleDebug ==="
           set -o pipefail
-          ./gradlew assembleDebug --no-daemon --stacktrace --info 2>&1 | tee ../gradle.log
-          echo "=== Build succeeded ==="
+          ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee ../gradle.log
+          echo "=== Build done ==="
 
       - name: Upload build log
         if: always()
