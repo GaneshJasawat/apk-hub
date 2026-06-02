@@ -46,7 +46,6 @@ jobs:
 
       - name: Init Capacitor Android
         run: |
-          ls -la dist/client/index.html
           rm -rf android
           npx cap add android
           npx cap copy android
