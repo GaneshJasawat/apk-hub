@@ -38,4 +38,7 @@ dist-ssr
 
 # Build output
 apk-output/
+run-logs/
+run-logs2/
+run-logs.zip
 *.zip
