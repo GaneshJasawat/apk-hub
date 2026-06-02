@@ -73,17 +73,28 @@ jobs:
           echo "=== Last 50 lines ==="
           tail -50 gradle.log
 
+      - name: Find and upload APK
+        run: |
+          echo "Searching for APK..."
+          find android -name "*.apk" -type f 2>/dev/null || true
+          if [ -f android/app/build/outputs/apk/debug/app-debug.apk ]; then
+            cp android/app/build/outputs/apk/debug/app-debug.apk apkhub-hybrid.apk
+          elif [ -f android/app/build/outputs/apk/debug/app-debug-unsigned.apk ]; then
+            cp android/app/build/outputs/apk/debug/app-debug-unsigned.apk apkhub-hybrid.apk
+          else
+            APK=$(find android -name "*.apk" -type f 2>/dev/null | head -1)
+            if [ -n "$APK" ]; then
+              cp "$APK" apkhub-hybrid.apk
+            else
+              echo "No APK found!"
+              exit 1
+            fi
+          fi
+          ls -la apkhub-hybrid.apk
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: apkhub-hybrid-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: apkhub-hybrid.apk
           retention-days: 30
-
-      - name: Upload release APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: apkhub-hybrid-apk-release
-          path: android/app/build/outputs/apk/release/app-release-unsigned.apk
-          retention-days: 7
-          if-no-files-found: ignore
