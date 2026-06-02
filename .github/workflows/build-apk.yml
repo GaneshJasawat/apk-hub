@@ -45,7 +45,7 @@ jobs:
           VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
 
       - name: Generate PNG icon & splash assets
-        run: node resources/icon-generate.js
+        run: node resources/icon-generate.cjs
 
       - name: Copy web build to Android
         run: npx cap copy android
