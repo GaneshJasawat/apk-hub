@@ -1,0 +1,10 @@
+﻿2026-06-02T11:29:08.5622644Z ##[group]Run node resources/icon-generate.cjs
+2026-06-02T11:29:08.5623027Z [36;1mnode resources/icon-generate.cjs[0m
+2026-06-02T11:29:08.5649513Z shell: /usr/bin/bash -e {0}
+2026-06-02T11:29:08.5649798Z env:
+2026-06-02T11:29:08.5650110Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.11-10/x64
+2026-06-02T11:29:08.5650634Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.11-10/x64
+2026-06-02T11:29:08.5651041Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2026-06-02T11:29:08.5651346Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2026-06-02T11:29:08.5651622Z ##[endgroup]
+2026-06-02T11:29:08.5967010Z Android resources generated: icons, splash, styles, strings

@@ -1,0 +1,32 @@
+﻿2026-06-02T11:29:06.0351799Z ##[group]Run rm -rf android
+2026-06-02T11:29:06.0352112Z [36;1mrm -rf android[0m
+2026-06-02T11:29:06.0352345Z [36;1mnpx cap add android[0m
+2026-06-02T11:29:06.0352587Z [36;1mnpx cap copy android[0m
+2026-06-02T11:29:06.0352825Z [36;1mnpx cap sync android[0m
+2026-06-02T11:29:06.0379393Z shell: /usr/bin/bash -e {0}
+2026-06-02T11:29:06.0379647Z env:
+2026-06-02T11:29:06.0379956Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.11-10/x64
+2026-06-02T11:29:06.0380484Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.11-10/x64
+2026-06-02T11:29:06.0380894Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2026-06-02T11:29:06.0381187Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2026-06-02T11:29:06.0381465Z ##[endgroup]
+2026-06-02T11:29:06.7571681Z ✔ Adding native android project in android in 43.78ms
+2026-06-02T11:29:06.7572598Z ✔ add in 44.50ms
+2026-06-02T11:29:06.8213299Z ✔ Copying web assets from client to android/app/src/main/assets/public in 6.19ms
+2026-06-02T11:29:06.8218340Z ✔ Creating capacitor.config.json in android/app/src/main/assets in 402.06μs
+2026-06-02T11:29:06.8412960Z ✔ copy android in 57.24ms
+2026-06-02T11:29:06.8824352Z ✔ Updating Android plugins in 14.08ms
+2026-06-02T11:29:06.9071126Z ✔ update android in 52.50ms
+2026-06-02T11:29:06.9185623Z ✔ Syncing Gradle in 194.27μs
+2026-06-02T11:29:06.9201469Z [success] android platform added!
+2026-06-02T11:29:06.9202711Z Follow the Developer Workflow guide to get building:
+2026-06-02T11:29:06.9204234Z https://capacitorjs.com/docs/basics/workflow
+2026-06-02T11:29:07.6476863Z ✔ Copying web assets from client to android/app/src/main/assets/public in 8.80ms
+2026-06-02T11:29:07.6485902Z ✔ Creating capacitor.config.json in android/app/src/main/assets in 660.84μs
+2026-06-02T11:29:07.6658883Z ✔ copy android in 69.89ms
+2026-06-02T11:29:08.4162107Z ✔ Copying web assets from client to android/app/src/main/assets/public in 9.52ms
+2026-06-02T11:29:08.4171332Z ✔ Creating capacitor.config.json in android/app/src/main/assets in 659.28μs
+2026-06-02T11:29:08.4348040Z ✔ copy android in 58.75ms
+2026-06-02T11:29:08.4796638Z ✔ Updating Android plugins in 14.05ms
+2026-06-02T11:29:08.5099373Z ✔ update android in 57.41ms
+2026-06-02T11:29:08.5277233Z [info] Sync finished in 0.178s

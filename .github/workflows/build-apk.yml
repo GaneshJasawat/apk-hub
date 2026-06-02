@@ -42,7 +42,7 @@ jobs:
           VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
 
       - name: Generate Capacitor index.html
-        run: node scripts/generate-capacitor-html.cjs
+        run: node scripts/generate-capacitor-html.mjs
 
       - name: Init Capacitor Android
         run: |

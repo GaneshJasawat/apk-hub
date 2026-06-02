@@ -1,0 +1,17 @@
+﻿2026-06-02T11:30:37.9370583Z ##[group]Run APK=$(find android -name "*.apk" -type f | head -1)
+2026-06-02T11:30:37.9371060Z [36;1mAPK=$(find android -name "*.apk" -type f | head -1)[0m
+2026-06-02T11:30:37.9371416Z [36;1mif [ -n "$APK" ]; then[0m
+2026-06-02T11:30:37.9371682Z [36;1m  cp "$APK" apkhub-hybrid.apk[0m
+2026-06-02T11:30:37.9371971Z [36;1m  ls -la apkhub-hybrid.apk[0m
+2026-06-02T11:30:37.9372235Z [36;1melse[0m
+2026-06-02T11:30:37.9372445Z [36;1m  echo "No APK found!"[0m
+2026-06-02T11:30:37.9372695Z [36;1m  exit 1[0m
+2026-06-02T11:30:37.9372892Z [36;1mfi[0m
+2026-06-02T11:30:37.9399302Z shell: /usr/bin/bash -e {0}
+2026-06-02T11:30:37.9399567Z env:
+2026-06-02T11:30:37.9399881Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.11-10/x64
+2026-06-02T11:30:37.9400387Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.11-10/x64
+2026-06-02T11:30:37.9400791Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2026-06-02T11:30:37.9401090Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2026-06-02T11:30:37.9401404Z ##[endgroup]
+2026-06-02T11:30:37.9597841Z -rw-r--r-- 1 runner runner 4383045 Jun  2 11:30 apkhub-hybrid.apk
