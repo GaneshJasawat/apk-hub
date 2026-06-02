@@ -41,8 +41,12 @@ jobs:
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
           VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
 
+      - name: Generate Capacitor index.html
+        run: node scripts/generate-capacitor-html.cjs
+
       - name: Init Capacitor Android
         run: |
+          ls -la dist/client/index.html
           rm -rf android
           npx cap add android
           npx cap copy android

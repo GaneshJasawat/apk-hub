@@ -1,0 +1,18 @@
+﻿2026-06-02T11:15:32.2672869Z ##[group]Run npm install --ignore-engines
+2026-06-02T11:15:32.2673296Z [36;1mnpm install --ignore-engines[0m
+2026-06-02T11:15:32.2700276Z shell: /usr/bin/bash -e {0}
+2026-06-02T11:15:32.2700548Z env:
+2026-06-02T11:15:32.2700851Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.11-10/x64
+2026-06-02T11:15:32.2701323Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.11-10/x64
+2026-06-02T11:15:32.2701861Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2026-06-02T11:15:32.2702147Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2026-06-02T11:15:32.2702422Z ##[endgroup]
+2026-06-02T11:15:32.7985563Z npm warn Unknown cli config "--ignore-engines". This will stop working in the next major version of npm.
+2026-06-02T11:15:39.5516074Z npm warn deprecated recharts@2.15.4: 1.x and 2.x branches are no longer active. Bump to Recharts v3 to receive latest features and bugfixes. See https://github.com/recharts/recharts/wiki/3.0-migration-guide
+2026-06-02T11:15:42.1893112Z 
+2026-06-02T11:15:42.1894089Z added 569 packages, and audited 570 packages in 10s
+2026-06-02T11:15:42.1894563Z 
+2026-06-02T11:15:42.1895399Z 111 packages are looking for funding
+2026-06-02T11:15:42.1895969Z   run `npm fund` for details
+2026-06-02T11:15:42.1907501Z 
+2026-06-02T11:15:42.1908210Z found 0 vulnerabilities

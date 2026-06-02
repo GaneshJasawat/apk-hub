@@ -1,0 +1,27 @@
+﻿2026-06-02T11:15:13.7103822Z ##[group]Run actions/setup-java@v4
+2026-06-02T11:15:13.7104917Z with:
+2026-06-02T11:15:13.7105705Z   distribution: temurin
+2026-06-02T11:15:13.7106618Z   java-version: 21
+2026-06-02T11:15:13.7107681Z   java-package: jdk
+2026-06-02T11:15:13.7108561Z   check-latest: false
+2026-06-02T11:15:13.7109450Z   server-id: github
+2026-06-02T11:15:13.7110356Z   server-username: GITHUB_ACTOR
+2026-06-02T11:15:13.7111411Z   server-password: GITHUB_TOKEN
+2026-06-02T11:15:13.7112446Z   overwrite-settings: true
+2026-06-02T11:15:13.7113425Z   job-status: success
+2026-06-02T11:15:13.7124020Z   token: ***
+2026-06-02T11:15:13.7124827Z ##[endgroup]
+2026-06-02T11:15:13.9084973Z ##[group]Installed distributions
+2026-06-02T11:15:13.9147758Z Resolved Java 21.0.11+10 from tool-cache
+2026-06-02T11:15:13.9150491Z Setting Java 21.0.11+10 as the default
+2026-06-02T11:15:13.9153128Z Creating toolchains.xml for JDK version 21 from temurin
+2026-06-02T11:15:13.9221959Z Writing to /home/runner/.m2/toolchains.xml
+2026-06-02T11:15:13.9223288Z 
+2026-06-02T11:15:13.9223961Z Java configuration:
+2026-06-02T11:15:13.9225310Z   Distribution: temurin
+2026-06-02T11:15:13.9226693Z   Version: 21.0.11+10
+2026-06-02T11:15:13.9228832Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.11-10/x64
+2026-06-02T11:15:13.9230402Z 
+2026-06-02T11:15:13.9231722Z ##[endgroup]
+2026-06-02T11:15:13.9237536Z Creating settings.xml with server-id: github
+2026-06-02T11:15:13.9246802Z Writing to /home/runner/.m2/settings.xml
