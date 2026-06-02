@@ -54,12 +54,8 @@ jobs:
           npx cap copy android
           npx cap sync android
 
-      - name: Generate custom icons & splash
+      - name: Generate custom icons, splash & Android resources
         run: node resources/icon-generate.cjs
-
-      - name: Set up Android manifest for cleartext
-        run: |
-          sed -i 's/android:allowBackup="true"/android:allowBackup="true" android:usesCleartextTraffic="true"/' android/app/src/main/AndroidManifest.xml
 
       - name: Build APK
         shell: bash
