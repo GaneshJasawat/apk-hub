@@ -31,7 +31,7 @@ jobs:
         run: npm install --ignore-engines
 
       - name: Install sharp for asset generation
-        run: npm install sharp --ignore-scripts --no-save
+        run: npm install sharp --no-save
 
       - name: Build web app
         run: npm run build
