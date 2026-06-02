@@ -44,19 +44,22 @@ jobs:
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
           VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
 
-      - name: Generate PNG icon & splash assets
-        run: node resources/icon-generate.cjs
-
       - name: Rebuild Capacitor Android project
         run: |
           echo "=== Installing SDK ==="
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-36" "build-tools;36.0.0" 2>&1 || echo "SDK install continued"
-          echo "=== Re-init Capacitor Android ==="
+          echo "=== Init Capacitor Android ==="
           rm -rf android
           npx cap add android
           npx cap copy android
           npx cap sync android
-          ls -la android/
+
+      - name: Generate custom icons & splash
+        run: node resources/icon-generate.cjs
+
+      - name: Set up Android manifest for cleartext
+        run: |
+          sed -i 's/android:allowBackup="true"/android:allowBackup="true" android:usesCleartextTraffic="true"/' android/app/src/main/AndroidManifest.xml
 
       - name: Build APK
         shell: bash
@@ -80,21 +83,15 @@ jobs:
         if: success()
         run: |
           echo "Searching for APK..."
-          find android -name "*.apk" -type f 2>/dev/null || true
-          if [ -f android/app/build/outputs/apk/debug/app-debug.apk ]; then
-            cp android/app/build/outputs/apk/debug/app-debug.apk apkhub-hybrid.apk
-          elif [ -f android/app/build/outputs/apk/debug/app-debug-unsigned.apk ]; then
-            cp android/app/build/outputs/apk/debug/app-debug-unsigned.apk apkhub-hybrid.apk
+          find android -name "*.apk" -type f
+          APK=$(find android -name "*.apk" -type f | head -1)
+          if [ -n "$APK" ]; then
+            cp "$APK" apkhub-hybrid.apk
+            ls -la apkhub-hybrid.apk
           else
-            APK=$(find android -name "*.apk" -type f 2>/dev/null | head -1)
-            if [ -n "$APK" ]; then
-              cp "$APK" apkhub-hybrid.apk
-            else
-              echo "No APK found!"
-              exit 1
-            fi
+            echo "No APK found!"
+            exit 1
           fi
-          ls -la apkhub-hybrid.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
