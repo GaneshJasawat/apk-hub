@@ -43,7 +43,8 @@ jobs:
 
       - name: Init Capacitor Android
         run: |
-          npx cap add android --force
+          rm -rf android
+          npx cap add android
           npx cap copy android
           npx cap sync android
 
