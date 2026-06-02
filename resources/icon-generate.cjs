@@ -65,17 +65,17 @@ async function main() {
   fs.copyFileSync(path.join(RESOURCES, "splash_drawable.xml"), path.join(drawableDir, "splash_drawable.xml"));
   console.log("  splash drawable");
 
-  // 6. Update styles.xml to use splash theme
+  // 6. Update styles.xml — replace existing splash style with our drawable
   const stylesPath = path.join(ANDROID_RES, "values", "styles.xml");
   let styles = fs.readFileSync(stylesPath, "utf-8");
-  if (!styles.includes("splash_drawable")) {
-    styles = styles.replace("</resources>", `    <style name="AppTheme.NoActionBarLaunch" parent="Theme.AppCompat.DayNight.NoActionBar">
+  styles = styles.replace(
+    /<style name="AppTheme\.NoActionBarLaunch".*?<\/style>/s,
+    `<style name="AppTheme.NoActionBarLaunch" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_drawable</item>
-    </style>
-</resources>`);
-    fs.writeFileSync(stylesPath, styles);
-    console.log("  styles.xml updated");
-  }
+    </style>`
+  );
+  fs.writeFileSync(stylesPath, styles);
+  console.log("  styles.xml updated");
 
   // 7. Update strings.xml app name
   const stringsPath = path.join(ANDROID_RES, "values", "strings.xml");
