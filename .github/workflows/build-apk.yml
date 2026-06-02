@@ -75,7 +75,16 @@ jobs:
           ./gradlew assembleDebug --no-daemon --stacktrace --info 2>&1 | tee ../gradle.log
           echo "=== Build succeeded ==="
 
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-build-log
+          path: gradle.log
+          retention-days: 7
+
       - name: Find and upload APK
+        if: success()
         run: |
           echo "Searching for APK..."
           find android -name "*.apk" -type f 2>/dev/null || true
