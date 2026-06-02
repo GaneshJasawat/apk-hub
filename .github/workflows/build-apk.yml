@@ -59,11 +59,19 @@ jobs:
 
       - name: Build APK
         run: |
+          echo "=== Java ==="
           java -version
+          echo "=== ANDROID_HOME ==="
+          echo $ANDROID_HOME
+          ls -la $ANDROID_HOME/platforms/ 2>/dev/null || echo "No platforms dir"
+          echo "=== Gradle ==="
           cd android
           chmod +x gradlew
           ./gradlew --version
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          echo "=== assembleDebug ==="
+          ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee gradle.log
+          echo "=== Last 50 lines ==="
+          tail -50 gradle.log
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
