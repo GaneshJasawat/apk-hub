@@ -35,3 +35,7 @@ dist-ssr
 
 # Environment files with secrets
 .env
+
+# Build output
+apk-output/
+*.zip
