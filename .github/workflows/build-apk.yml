@@ -53,24 +53,26 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
-      - name: Install Android SDK platform 36
+      - name: Install Android SDK components
         run: |
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-36" "build-tools;36.0.0" 2>&1 || echo "SDK install continued"
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-36" "build-tools;36.0.0" "platforms;android-35" "build-tools;35.0.0" 2>&1 || echo "SDK install continued"
+          echo "=== Installed SDKs ==="
+          ls -la $ANDROID_HOME/platforms/
+          ls -la $ANDROID_HOME/build-tools/
 
       - name: Build APK
         shell: bash
         run: |
           echo "=== Java ==="
           java -version
-          echo "=== ANDROID_HOME ==="
-          echo $ANDROID_HOME
-          echo "=== Gradle ==="
+          echo "=== ANDROID_HOME: $ANDROID_HOME ==="
+          echo "=== Gradle version ==="
           cd android
           chmod +x gradlew
           ./gradlew --version
-          echo "=== assembleDebug ==="
+          echo "=== Running assembleDebug ==="
           set -o pipefail
-          ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee ../gradle.log
+          ./gradlew assembleDebug --no-daemon --stacktrace --info 2>&1 | tee ../gradle.log
           echo "=== Build succeeded ==="
 
       - name: Find and upload APK
