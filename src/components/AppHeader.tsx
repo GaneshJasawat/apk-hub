@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Package, Upload, LogOut, LogIn, Shield, Code2 } from "lucide-react";
+import { Package, Upload, LogOut, LogIn, Shield, Code2, Brain } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useIsAdmin } from "@/hooks/useIsAdmin";
 import { Button } from "@/components/ui/button";
@@ -20,6 +20,11 @@ export function AppHeader() {
           <span className="tracking-tight">ApkHub</span>
         </Link>
         <nav className="flex items-center gap-2">
+          <Link to="/neet-planner">
+            <Button variant="ghost" size="sm" className="gap-2">
+              <Brain className="h-4 w-4" /> <span className="hidden sm:inline">NEET</span>
+            </Button>
+          </Link>
           <Link to="/repos">
             <Button variant="ghost" size="sm" className="gap-2">
               <Code2 className="h-4 w-4" /> <span className="hidden sm:inline">Repos</span>

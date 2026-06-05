@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UploadRouteImport } from './routes/upload'
+import { Route as NeetPlannerRouteImport } from './routes/neet-planner'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
@@ -23,6 +24,11 @@ import { Route as ApiPublicInstallIdRouteImport } from './routes/api/public/inst
 const UploadRoute = UploadRouteImport.update({
   id: '/upload',
   path: '/upload',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NeetPlannerRoute = NeetPlannerRouteImport.update({
+  id: '/neet-planner',
+  path: '/neet-planner',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/neet-planner': typeof NeetPlannerRoute
   '/upload': typeof UploadRoute
   '/app/$id': typeof AppIdRoute
   '/repos/$id': typeof ReposIdRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/neet-planner': typeof NeetPlannerRoute
   '/upload': typeof UploadRoute
   '/app/$id': typeof AppIdRoute
   '/repos/$id': typeof ReposIdRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/neet-planner': typeof NeetPlannerRoute
   '/upload': typeof UploadRoute
   '/app/$id': typeof AppIdRoute
   '/repos/$id': typeof ReposIdRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
+    | '/neet-planner'
     | '/upload'
     | '/app/$id'
     | '/repos/$id'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
+    | '/neet-planner'
     | '/upload'
     | '/app/$id'
     | '/repos/$id'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
+    | '/neet-planner'
     | '/upload'
     | '/app/$id'
     | '/repos/$id'
@@ -151,6 +163,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
+  NeetPlannerRoute: typeof NeetPlannerRoute
   UploadRoute: typeof UploadRoute
   AppIdRoute: typeof AppIdRoute
   ReposIdRoute: typeof ReposIdRoute
@@ -167,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/upload'
       fullPath: '/upload'
       preLoaderRoute: typeof UploadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/neet-planner': {
+      id: '/neet-planner'
+      path: '/neet-planner'
+      fullPath: '/neet-planner'
+      preLoaderRoute: typeof NeetPlannerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -239,6 +259,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
+  NeetPlannerRoute: NeetPlannerRoute,
   UploadRoute: UploadRoute,
   AppIdRoute: AppIdRoute,
   ReposIdRoute: ReposIdRoute,

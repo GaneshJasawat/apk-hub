@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <rect width="192" height="192" rx="32" fill="#1A1A1A"/>
+  <rect x="48" y="44" width="96" height="104" rx="8" fill="#F5F5F5"/>
+  <rect x="46" y="44" width="16" height="104" rx="4" fill="#F44336"/>
+  <line x1="72" y1="66" x2="132" y2="66" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+  <line x1="72" y1="78" x2="120" y2="78" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+  <line x1="72" y1="90" x2="126" y2="90" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+  <rect x="74" y="100" width="52" height="36" rx="4" fill="#E53935"/>
+  <text x="100" y="125" text-anchor="middle" fill="#FFF" font-size="22" font-family="sans-serif" font-weight="bold">NEET</text>
+</svg>
