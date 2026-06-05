@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search, Upload, Sparkles, Globe, Package } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppHeader } from "@/components/AppHeader";
@@ -26,11 +26,21 @@ function Home() {
         .select("id,title,short_description,category,icon_url,downloads,created_at,app_type")
         .order("created_at", { ascending: false });
       if (error) throw error;
-      return data ?? [];
+      const result = data ?? [];
+      setCache("apps", result);
+      return result;
     },
   });
 
-  const filtered = apps.filter(
+  const [cachedApps, setCachedApps] = useState<any[] | null>(null);
+  useEffect(() => {
+    getCached<any[]>("apps").then(setCachedApps);
+  }, []);
+
+  const displayApps = (isLoading ? cachedApps : apps) ?? [];
+  const loading = isLoading && !cachedApps;
+
+  const filtered = displayApps.filter(
     (a) =>
       (cat === "All" || a.category === cat) &&
       (typeFilter === "All" || (typeFilter === "APK" ? a.app_type === "apk" : a.app_type === "weblink")) &&
@@ -121,7 +131,7 @@ function Home() {
           {cat === "All" ? "Recently added" : cat}
         </h2>
 
-        {isLoading ? (
+        {loading ? (
           <p className="text-muted-foreground">Loading apps...</p>
         ) : filtered.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-border p-10 text-center">

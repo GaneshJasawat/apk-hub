@@ -1,9 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
 import { Download, ArrowLeft, Package, Globe } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppHeader } from "@/components/AppHeader";
 import { Button } from "@/components/ui/button";
+import { getCached, setCache } from "@/lib/offline-cache";
 
 export const Route = createFileRoute("/app/$id")({
   component: AppDetail,
@@ -40,11 +42,22 @@ function AppDetail() {
         .select("*")
         .eq("app_id", id)
         .order("position", { ascending: true });
-      return { app, shots: shots ?? [] };
+      const result = { app, shots: shots ?? [] };
+      setCache(`app:${id}`, result);
+      return result;
     },
+    retry: false,
   });
 
-  if (isLoading) {
+  const [cachedDetail, setCachedDetail] = useState<any>(undefined);
+  useEffect(() => {
+    getCached<any>(`app:${id}`).then(setCachedDetail);
+  }, [id]);
+
+  const displayData = data ?? cachedDetail;
+  const loading = isLoading && !cachedDetail;
+
+  if (loading) {
     return (
       <div className="min-h-screen bg-background">
         <AppHeader />
@@ -52,8 +65,8 @@ function AppDetail() {
       </div>
     );
   }
-  if (!data) return null;
-  const { app, shots } = data;
+  if (!displayData) return null;
+  const { app, shots } = displayData;
 
   const isWeblink = app.app_type === "weblink";
   const installHref = !isWeblink && app.apk_url ? `/api/public/install/${app.id}` : undefined;
